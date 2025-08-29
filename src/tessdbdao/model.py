@@ -300,7 +300,7 @@ def make_NameMapping(declarative_base: Type) -> Type:
 # =====
 
 def make_TessView(declarative_base: Type, Tess: Type, NameMapping: Type, Location: Type, Observer: Type) -> Type:
-    TessView = view(
+    tess_view = view(
         name="tess_v",
         metadata=declarative_base.metadata,
         selectable=select(
@@ -347,7 +347,11 @@ def make_TessView(declarative_base: Type, Tess: Type, NameMapping: Type, Locatio
         .join(NameMapping, NameMapping.mac_address == Tess.mac_address)
         .where(NameMapping.valid_state == ValidState.CURRENT),
     )
+    class TessView(declarative_base):
+        __table__ = tess_view
+
     return TessView
+
 
 def make_TessReadings(declarative_base: Type) -> Type:
     class TessReadings(declarative_base):
