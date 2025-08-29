@@ -31,7 +31,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from lica.sqlalchemy.asyncio.model import Model
+from lica.sqlalchemy.metadata import metadata
 from lica.sqlalchemy.view import view
 
 from .constants import (
@@ -68,7 +68,7 @@ ObserverCol: Enum = Enum(
     ObserverType,
     name="observer_type",
     create_constraint=False,
-    metadata=Model.metadata,
+    metadata=metadata,
     validate_strings=True,
     values_callable=lambda x: [e.value for e in x],
 )
@@ -77,7 +77,7 @@ PhotometerModelCol: Enum = Enum(
     PhotometerModel,
     name="model_type",
     create_constraint=False,
-    metadata=Model.metadata,
+    metadata=metadata,
     validate_strings=True,
     values_callable=lambda x: [e.name for e in x],
 )
@@ -87,7 +87,7 @@ ValidStateCol: Enum = Enum(
     ValidState,
     name="valid_state_type",
     create_constraint=False,
-    metadata=Model.metadata,
+    metadata=metadata,
     validate_strings=True,
     values_callable=lambda x: [e.value for e in x],
 )
@@ -97,7 +97,7 @@ PopulationCentreCol: Enum = Enum(
     PopulationCentre,
     name="population_type",
     create_constraint=False,
-    metadata=Model.metadata,
+    metadata=metadata,
     validate_strings=True,
     values_callable=lambda x: [e.name for e in x],
 )
@@ -106,7 +106,7 @@ TimestampSourceCol: Enum = Enum(
     TimestampSource,
     name="timestamp_source_type",
     create_constraint=False,
-    metadata=Model.metadata,
+    metadata=metadata,
     validate_strings=True,
     values_callable=lambda x: [e.value for e in x],
 )
@@ -115,7 +115,7 @@ ReadingSourceCol: Enum = Enum(
     ReadingSource,
     name="reading_source_type",
     create_constraint=False,
-    metadata=Model.metadata,
+    metadata=metadata,
     validate_strings=True,
     values_callable=lambda x: [e.value for e in x],
 )
@@ -125,7 +125,7 @@ RegisterStateCol: Enum = Enum(
     RegisterState,
     name="register_state_type",
     create_constraint=False,
-    metadata=Model.metadata,
+    metadata=metadata,
     validate_strings=True,
     values_callable=lambda x: [e.value for e in x],
 )
