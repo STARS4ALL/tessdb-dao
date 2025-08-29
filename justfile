@@ -95,7 +95,7 @@ env-backup bak_dir:
     fi
     mkdir -p {{ bak_dir }}
     cp {{ local_env }} {{ bak_dir }}
-    cp config.toml {{ bak_dir }}
+
   
 [private]
 env-restore bak_dir:
@@ -106,4 +106,4 @@ env-restore bak_dir:
         exit 1 
     fi
     cp {{ bak_dir }}/.env {{ local_env }}
-    cp {{ bak_dir }}/config.toml .
+    
