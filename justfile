@@ -35,18 +35,18 @@ requirements:
     uv pip compile pyproject.toml -o requirements.txt
 
 # Publish the package to PyPi
-publish pkg="tessdb-dao" import="tessdbdao": build
+publish prj=project pkg="tessdbdao": build
     twine upload -r pypi dist/*
-    uv run --no-project --with {{pkg}} --refresh-package {{pkg}} \
-        -- python -c "from {{import}} import __version__; print(__version__)"
+    uv run --no-project --with {{prj}} --refresh-package {{prj}} \
+        -- python -c "from {{pkg}} import __version__; print(__version__)"
 
 # Publish to Test PyPi server
-test-publish pkg="tessdb-dao" import="tessdbdao": build
+test-publish prj=project pkg="tessdbdao": build
     twine upload --verbose -r testpypi dist/*
-    uv run --no-project  --with {{pkg}} --refresh-package {{pkg}} \
+    uv run --no-project  --with {{prj}} --refresh-package {{prj}} \
         --index-url https://test.pypi.org/simple/ \
         --extra-index-url https://pypi.org/simple/ \
-        -- python -c "from {{import}} import __version__; print(__version__)"
+        -- python -c "from {{pkg}} import __version__; print(__version__)"
 
 
 # Backup .env to storage unit
