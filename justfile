@@ -35,13 +35,13 @@ requirements:
     uv pip compile pyproject.toml -o requirements.txt
 
 # Publish the package to PyPi
-publish pkg="tessdb-dao": build
+publish pkg="tessdbdao": build
     twine upload -r pypi dist/*
     uv run --no-project --with {{pkg}} --refresh-package {{pkg}} \
         -- python -c "from {{pkg}} import __version__; print(__version__)"
 
 # Publish to Test PyPi server
-test-publish pkg="tessdb-dao": build
+test-publish pkg="tessdbdao": build
     twine upload --verbose -r testpypi dist/*
     uv run --no-project  --with {{pkg}} --refresh-package {{pkg}} \
         --index-url https://test.pypi.org/simple/ \
