@@ -285,8 +285,7 @@ def make_NameMapping(declarative_base: Type) -> Type:
     class NameMapping(declarative_base):
         __tablename__ = "name_to_mac_t"
 
-        # This columnd doesn'ta ppear in the original file
-        #id: Mapped[int] = mapped_column(primary_key=True)
+        rowid: Mapped[int] = mapped_column(primary_key=True)
         name: Mapped[str] = mapped_column(String(64), index=True)
         mac_address: Mapped[str] = mapped_column(String(17), index=True)
 
