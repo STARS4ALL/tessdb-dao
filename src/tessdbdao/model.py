@@ -163,6 +163,7 @@ def make_Date(declarative_base: Type) -> Type:
         # Jan, Feb, Mar, ...
         month_abbr: Mapped[str] = mapped_column(String(3))
         year: Mapped[int]
+
     return Date
 
 
@@ -178,7 +179,9 @@ def make_Time(declarative_base: Type) -> Type:
         minute: Mapped[int]
         second: Mapped[int]
         day_fraction: Mapped[float]
+
     return Time
+
 
 def make_Observer(declarative_base: Type) -> Type:
     class Observer(declarative_base):
@@ -201,6 +204,7 @@ def make_Observer(declarative_base: Type) -> Type:
         valid_since: Mapped[datetime] = mapped_column(DateTime)
         valid_until: Mapped[datetime] = mapped_column(DateTime)
         valid_state: Mapped[ValidState] = mapped_column(ValidStateCol)
+
     return Observer
 
 
@@ -227,6 +231,7 @@ def make_Location(declarative_base: Type) -> Type:
         timezone: Mapped[str] = mapped_column(String(64))
 
         __table_args__ = (UniqueConstraint("longitude", "latitude"),)
+
     return Location
 
 
@@ -238,6 +243,7 @@ def make_Units(declarative_base: Type) -> Type:
         # federal state, comunidad autonomica, etc..
         timestamp_source: Mapped[TimestampSource] = mapped_column(TimestampSourceCol)
         reading_source: Mapped[ReadingSource] = mapped_column(ReadingSourceCol)
+
     return Units
 
 
@@ -275,6 +281,7 @@ def make_Tess(declarative_base: Type) -> Type:
         # This is not a real column, it s meant for the ORM
         location: Mapped["Location"] = relationship()  # noqa: F821
         observer: Mapped["Observer"] = relationship()  # noqa: F821
+
     return Tess
 
 
@@ -292,6 +299,10 @@ def make_NameMapping(declarative_base: Type) -> Type:
         valid_since: Mapped[datetime] = mapped_column(DateTime)
         valid_until: Mapped[datetime] = mapped_column(DateTime)
         valid_state: Mapped[ValidState] = mapped_column(ValidStateCol)
+
+        def __repr__(self) -> str:
+            return f"NameMapping(name={self.name}, mac={self.mac_address}, valid_since={self.valid_since}, valid_until={self.valid_until}, valid_state={self.valid_state})"
+
     return NameMapping
 
 
@@ -299,7 +310,10 @@ def make_NameMapping(declarative_base: Type) -> Type:
 # VIEWS
 # =====
 
-def make_TessView(declarative_base: Type, Tess: Type, NameMapping: Type, Location: Type, Observer: Type) -> Type:
+
+def make_TessView(
+    declarative_base: Type, Tess: Type, NameMapping: Type, Location: Type, Observer: Type
+) -> Type:
     tess_view = view(
         name="tess_v",
         metadata=declarative_base.metadata,
@@ -347,6 +361,7 @@ def make_TessView(declarative_base: Type, Tess: Type, NameMapping: Type, Locatio
         .join(NameMapping, NameMapping.mac_address == Tess.mac_address)
         .where(NameMapping.valid_state == ValidState.CURRENT),
     )
+
     class TessView(declarative_base):
         __table__ = tess_view
 
@@ -374,9 +389,10 @@ def make_TessReadings(declarative_base: Type) -> Type:
         latitude: Mapped[Optional[float]]  # decimal degrees
         elevation: Mapped[Optional[float]]  # meters above sea level
         signal_strength: Mapped[int]
-        hash: Mapped[Optional[str]] = mapped_column(String(6)) # optional, to verify readings
+        hash: Mapped[Optional[str]] = mapped_column(String(6))  # optional, to verify readings
 
         __table_args__ = (PrimaryKeyConstraint(date_id, time_id, tess_id),)
+
     return TessReadings
 
 
@@ -410,4 +426,5 @@ def make_Tess4cReadings(declarative_base: Type) -> Type:
         hash: Mapped[Optional[str]] = mapped_column(String(6))  # optional, to verify readings
 
         __table_args__ = (PrimaryKeyConstraint(date_id, time_id, tess_id),)
+
     return Tess4cReadings
