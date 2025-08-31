@@ -5,7 +5,11 @@
 # see the AUTHORS file for authors
 # ----------------------------------------------------------------------
 
+from math import pi
 from enum import StrEnum
+
+EARTH_RADIUS = 6371009.0  # in meters
+GEO_COORD_EPSILON = (2 / EARTH_RADIUS) * (180 / pi) # in degrees
 
 
 class ObserverType(StrEnum):
