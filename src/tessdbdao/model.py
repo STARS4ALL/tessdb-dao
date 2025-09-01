@@ -260,7 +260,7 @@ def make_Tess(declarative_base: Type) -> Type:
         model: Mapped[PhotometerModel] = mapped_column(PhotometerModelCol)
         firmware: Mapped[str] = mapped_column(String(255))
         authorised: Mapped[bool] = mapped_column(Boolean)
-        registered: Mapped[RegisterState] = mapped_column(PhotometerModelCol)
+        registered: Mapped[RegisterState] = mapped_column(RegisterStateCol)
         # From 1 to 4
         nchannels: Mapped[int]
         zp1: Mapped[float]
