@@ -201,8 +201,8 @@ def make_Observer(declarative_base: Type) -> Type:
         # Person/Organization contact org_email
         email: Mapped[Optional[str]] = mapped_column(String(64))
         # Version control attributes for Persons that change affiliations
-        valid_since: Mapped[datetime] = mapped_column(DateTime)
-        valid_until: Mapped[datetime] = mapped_column(DateTime)
+        valid_since: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+        valid_until: Mapped[datetime] = mapped_column(DateTime(timezone=True))
         valid_state: Mapped[ValidState] = mapped_column(ValidStateCol)
 
     return Observer
@@ -254,8 +254,8 @@ def make_Tess(declarative_base: Type) -> Type:
         tess_id: Mapped[int] = mapped_column(primary_key=True)
         mac_address: Mapped[str] = mapped_column(String(17), index=True)
         # Version control attributes for Persons that change affiliations
-        valid_since: Mapped[datetime] = mapped_column(DateTime)
-        valid_until: Mapped[datetime] = mapped_column(DateTime)
+        valid_since: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+        valid_until: Mapped[datetime] = mapped_column(DateTime(timezone=True))
         valid_state: Mapped[ValidState] = mapped_column(ValidStateCol)
         model: Mapped[PhotometerModel] = mapped_column(PhotometerModelCol)
         firmware: Mapped[str] = mapped_column(String(255))
@@ -296,8 +296,8 @@ def make_NameMapping(declarative_base: Type) -> Type:
         name: Mapped[str] = mapped_column(String(64), index=True)
         mac_address: Mapped[str] = mapped_column(String(17), index=True)
 
-        valid_since: Mapped[datetime] = mapped_column(DateTime)
-        valid_until: Mapped[datetime] = mapped_column(DateTime)
+        valid_since: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+        valid_until: Mapped[datetime] = mapped_column(DateTime(timezone=True))
         valid_state: Mapped[ValidState] = mapped_column(ValidStateCol)
 
         def __repr__(self) -> str:
