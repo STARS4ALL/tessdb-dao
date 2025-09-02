@@ -12,6 +12,7 @@
 from ._version import __version__
 from .constants import (
     GEO_COORD_EPSILON,
+    INFINITE_T,
     ObserverType,
     PhotometerModel,
     ValidState,
@@ -25,6 +26,7 @@ from .constants import (
 __all__ = [
     "__version__",
     "GEO_COORD_EPSILON",
+    "INFINITE_T",
     "ObserverType",
     "PhotometerModel",
     "ValidState",
