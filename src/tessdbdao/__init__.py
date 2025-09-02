@@ -19,6 +19,7 @@ from .constants import (
     TimestampSource,
     ReadingSource,
     RegisterState,
+    RegisterOp,
 )
 
 __all__ = [
@@ -31,4 +32,5 @@ __all__ = [
     "TimestampSource",
     "ReadingSource",
     "RegisterState",
+    "RegisterOp",
 ]

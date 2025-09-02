@@ -44,3 +44,9 @@ class RegisterState(StrEnum):
     MANUAL = "Manual"
     AUTO = "Automatic"
     UNKNOWN = "Unknown"
+
+class RegisterOp(StrEnum):
+    CREATE = "CR"
+    RENAME = "RN"
+    REPAIR = "RP"
+    EXTIN = "XX"
