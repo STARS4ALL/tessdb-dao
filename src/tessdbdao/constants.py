@@ -48,5 +48,5 @@ class RegisterState(StrEnum):
 class RegisterOp(StrEnum):
     CREATE = "CR"
     RENAME = "RN"
-    REPAIR = "RP"
-    EXTIN = "XX"
+    REPLACE = "RP"
+    EXTINCT = "XX"
