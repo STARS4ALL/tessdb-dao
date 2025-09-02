@@ -428,3 +428,4 @@ def make_Tess4cReadings(declarative_base: Type) -> Type:
         __table_args__ = (PrimaryKeyConstraint(date_id, time_id, tess_id),)
 
     return Tess4cReadings
+
