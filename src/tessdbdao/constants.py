@@ -5,14 +5,7 @@
 # see the AUTHORS file for authors
 # ----------------------------------------------------------------------
 
-from math import pi
 from enum import StrEnum
-from datetime import datetime, timezone
-
-EARTH_RADIUS = 6371009.0  # in meters
-GEO_COORD_EPSILON = (2 / EARTH_RADIUS) * (180 / pi) # in degrees
-
-INFINITE_T = datetime(year=2999, month=12, day=31, hour=23, minute=59, second=59, tzinfo=timezone.utc)
 
 class ObserverType(StrEnum):
     PERSON = "Individual"
@@ -46,9 +39,3 @@ class RegisterState(StrEnum):
     MANUAL = "Manual"
     AUTO = "Automatic"
     UNKNOWN = "Unknown"
-
-class RegisterOp(StrEnum):
-    CREATE = "CR"
-    RENAME = "RN"
-    REPLACE = "RP"
-    EXTINCT = "XX"
