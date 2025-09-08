@@ -48,6 +48,8 @@ test-publish prj=project pkg="tessdbdao": build
         --extra-index-url https://pypi.org/simple/ \
         -- python -c "from {{pkg}} import __version__; print(__version__)"
 
+pull:
+    git pull --rebase --tags
 
 # Backup .env to storage unit
 env-bak drive=def_drive: (check_mnt drive) (env-backup join(drive, "env", project))
