@@ -51,6 +51,9 @@ test-publish prj=project pkg="tessdbdao": build
 pull:
     git pull --rebase --tags
 
+push:
+    git push --tags
+
 # Backup .env to storage unit
 env-bak drive=def_drive: (check_mnt drive) (env-backup join(drive, "env", project))
 
