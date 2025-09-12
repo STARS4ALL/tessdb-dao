@@ -206,7 +206,7 @@ def make_Observer(declarative_base: Type) -> Type:
         valid_state: Mapped[ValidState] = mapped_column(ValidStateCol)
 
         def __repr__(self):
-            return f"Observer(observer_id={self.observer_id}, type={self.type}, name={self.name}, affiliation={self.affiliation}, acronym={self.acronym}, website_url={self.website_url}, email={self.email}, valid_since={self.valid_since}, valid_until={self.valid_until}, valid_state={self.valid_state})"
+            return f"Observer(observer_id={self.observer_id}, type='{self.type}', name='{self.name}', affiliation='{self.affiliation}', acronym='{self.acronym}', website_url='{self.website_url}', email='{self.email}', valid_since='{self.valid_since}', valid_until='{self.valid_until}', valid_state='{self.valid_state}')"
 
 
     return Observer
@@ -237,7 +237,7 @@ def make_Location(declarative_base: Type) -> Type:
         __table_args__ = (UniqueConstraint("longitude", "latitude"),)
 
         def __repr__(self):
-            return f"Location(location_id={self.location_id}, longitude={self.longitude}, latitude={self.latitude}, elevation={self.elevation}, place={self.place}, town={self.town}, sub_region={self.sub_region}, region={self.region}, country={self.country}, timezone={self.timezone})"
+            return f"Location(location_id={self.location_id}, longitude={self.longitude}, latitude={self.latitude}, elevation={self.elevation}, place='{self.place}', town='{self.town}', sub_region='{self.sub_region}', region='{self.region}', country='{self.country}', timezone='{self.timezone}')"
 
     return Location
 
