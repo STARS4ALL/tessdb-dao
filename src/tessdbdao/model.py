@@ -290,7 +290,7 @@ def make_Tess(declarative_base: Type) -> Type:
         observer: Mapped["Observer"] = relationship()  # noqa: F821
 
         def __repr__(self):
-            return f"id={self.tess_id}, mac={self.mac_address}, model={self.model}, firmware={self.firmware}, zp1={self.zp1}, loc_id={self.location_id}, obs_id={self._observer_if}"
+            return f"id={self.tess_id}, mac={self.mac_address}, model={self.model}, firmware={self.firmware}, zp1={self.zp1}, loc_id={self.location_id}, obs_id={self.observer_id}"
 
     return Tess
 
