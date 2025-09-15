@@ -11,7 +11,7 @@
 
 from __future__ import annotations
 
-from typing import Optional, Type
+from typing import Optional, Type, Dict, Any
 from datetime import datetime
 
 # =====================
@@ -208,6 +208,19 @@ def make_Observer(declarative_base: Type) -> Type:
         def __repr__(self):
             return f"Observer(observer_id={self.observer_id}, type='{self.type}', name='{self.name}', affiliation='{self.affiliation}', acronym='{self.acronym}', website_url='{self.website_url}', email='{self.email}', valid_since='{self.valid_since}', valid_until='{self.valid_until}', valid_state='{self.valid_state}')"
 
+        def to_dict(self) -> Dict[str, Any]:
+            return {
+                "observer_id": self.observer_id,
+                "type": self.type,
+                "name": self.name,
+                "affiliation": self.affiliation,
+                "acronym": self.acronym,
+                "website_url": self.website_url,
+                "email": self.email,
+                "valid_since": self.valid_since,
+                "valid_until": self.valid_until,
+                "valid_state": self.valid_state,
+            }
 
     return Observer
 
@@ -239,6 +252,20 @@ def make_Location(declarative_base: Type) -> Type:
         def __repr__(self):
             return f"Location(location_id={self.location_id}, longitude={self.longitude}, latitude={self.latitude}, elevation={self.elevation}, place='{self.place}', town='{self.town}', sub_region='{self.sub_region}', region='{self.region}', country='{self.country}', timezone='{self.timezone}')"
 
+        def to_dict(self) -> Dict[str, Any]:
+            return {
+                "location_id": self.location_id,
+                "longitude": self.longitude,
+                "latitude": self.latitude,
+                "elevation": self.elevation,
+                "place": self.place,
+                "town": self.town,
+                "sub_region": self.sub_region,
+                "region": self.region,
+                "country": self.country,
+                "timezone": self.timezone,
+            }
+
     return Location
 
 
@@ -250,6 +277,16 @@ def make_Units(declarative_base: Type) -> Type:
         # federal state, comunidad autonomica, etc..
         timestamp_source: Mapped[TimestampSource] = mapped_column(TimestampSourceCol)
         reading_source: Mapped[ReadingSource] = mapped_column(ReadingSourceCol)
+
+        def __repr__(self):
+            return f"Units(units_id={self.units_id}, timestamp_source={self.timestamp_source}, reading_source={self.reading_source}')"
+
+        def to_dict(self) -> Dict[str, Any]:
+            return {
+                "units_id": self.units_id,
+                "timestamp_source": self.timestamp_source,
+                "reading_source": self.reading_source,
+            }
 
     return Units
 
@@ -292,6 +329,34 @@ def make_Tess(declarative_base: Type) -> Type:
         def __repr__(self):
             return f"id={self.tess_id}, mac={self.mac_address}, model={self.model}, firmware={self.firmware}, zp1={self.zp1}, valid_since={self.valid_since}, valid_until={self.valid_until}, valid_state={self.valid_state}, loc_id={self.location_id}, obs_id={self.observer_id}"
 
+        def to_dict(self) -> Dict[str, Any]:
+            return {
+                "tess_id": self.tess_id,
+                "mac_address": self.mac_address,
+                "model": self.model,
+                "valid_since": self.valid_since,
+                "valid_until": self.valid_until,
+                "valid_state": self.valid_state,
+                "firmware": self.firmware,
+                "authorised": self.authorised,
+                "registered": self.registered,
+                "nchannels": self.nchannels,
+                "zp1": self.zp1,
+                "filter1": self.filter1,
+                "offset1": self.offset1,
+                "zp2": self.zp2,
+                "filter2": self.filter2,
+                "offset2": self.offset2,
+                "zp3": self.zp3,
+                "filter3": self.filter3,
+                "offset3": self.offset3,
+                "zp4": self.zp4,
+                "filter4": self.filter4,
+                "offset4": self.offset4,
+                "location_id": self.location_id,
+                "observer_id": self.observer_id,
+            }
+
     return Tess
 
 
@@ -312,6 +377,16 @@ def make_NameMapping(declarative_base: Type) -> Type:
 
         def __repr__(self) -> str:
             return f"NameMapping(name={self.name}, mac={self.mac_address}, valid_since={self.valid_since}, valid_until={self.valid_until}, valid_state={self.valid_state})"
+
+        def to_dict(self) -> Dict[str, Any]:
+            return {
+                "rowid": self.rowid,
+                "name": self.name,
+                "mac_address": self.mac_address,
+                "valid_since": self.valid_since,
+                "valid_until": self.valid_until,
+                "valid_state": self.valid_state,
+            }
 
     return NameMapping
 
@@ -438,4 +513,3 @@ def make_Tess4cReadings(declarative_base: Type) -> Type:
         __table_args__ = (PrimaryKeyConstraint(date_id, time_id, tess_id),)
 
     return Tess4cReadings
-
