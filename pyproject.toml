@@ -30,6 +30,14 @@ dependencies = [
   "lica[aiosqlalchemy]>=2.0", # needs lica library from 2.x on
 ]
 
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "mypy>=1.15.0",
+]
+
 [project.urls]
 Homepage = "https://foundation.stars4all.eu"
 Repository = "https://github.com/astrorafael/tessdb-dao.git"
@@ -65,9 +73,3 @@ script-files = []
 
 [tool.ruff]
 line-length = 100
-
-[tool.uv]
-dev-dependencies = [
-    "pytest>=8.3.3",
-    "mypy>=1.15.0",
-]

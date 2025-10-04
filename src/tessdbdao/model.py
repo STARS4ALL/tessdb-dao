@@ -29,7 +29,9 @@ from sqlalchemy import (
     PrimaryKeyConstraint,
     select,
 )
+
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.schema import Index
 
 from lica.sqlalchemy.metadata import metadata
 from lica.sqlalchemy.view import view
@@ -476,7 +478,16 @@ def make_TessReadings(declarative_base: Type) -> Type:
         signal_strength: Mapped[int]
         hash: Mapped[Optional[str]] = mapped_column(String(6))  # optional, to verify readings
 
-        __table_args__ = (PrimaryKeyConstraint(date_id, time_id, tess_id),)
+        __table_args__ = (
+            PrimaryKeyConstraint(date_id, time_id, tess_id),
+            Index(
+                "ix_tess_readings_t_tess_date_time_location",
+                tess_id,
+                date_id,
+                time_id,
+                location_id,
+            ),
+        )
 
     return TessReadings
 
@@ -510,6 +521,15 @@ def make_Tess4cReadings(declarative_base: Type) -> Type:
         signal_strength: Mapped[int]
         hash: Mapped[Optional[str]] = mapped_column(String(6))  # optional, to verify readings
 
-        __table_args__ = (PrimaryKeyConstraint(date_id, time_id, tess_id),)
+        __table_args__ = (
+            PrimaryKeyConstraint(date_id, time_id, tess_id),
+            Index(
+                "ix_tess_readings4c_t_tess_date_time_location",
+                tess_id,
+                date_id,
+                time_id,
+                location_id,
+            ),
+        )
 
     return Tess4cReadings
